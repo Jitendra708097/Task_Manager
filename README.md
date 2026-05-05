@@ -1,5 +1,13 @@
 # Task Manager
 
+# Admin
+for admin email: user@gmail.com
+password: Abc@12345
+
+# Member
+email: admin01@gmail.com
+password: Abc@12345
+
 A full-stack Task Manager web app for creating projects, assigning team tasks, and tracking delivery progress with Admin and Member access.
 
 ## Role
