@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 require("dotenv").config();
 
 const connectDB = require("./src/config/db");
@@ -13,6 +14,7 @@ const { notFound, errorHandler } = require("./src/middleware/error.middleware");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+const clientDistPath = path.resolve(__dirname, "../client/dist");
 const allowedOrigins = [
   process.env.CLIENT_URL?.replace(/\/$/, ""),
   "http://localhost:5173",
@@ -42,6 +44,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+
+app.use(express.static(clientDistPath));
+
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"));
+});
 
 app.use(notFound);
 app.use(errorHandler);

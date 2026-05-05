@@ -158,6 +158,29 @@ Open:
 http://localhost:5173
 ```
 
+## Railway Single URL Deployment
+
+This project can be deployed as one Railway service. Express serves the React production build from `client/dist`, and the React app calls the API through `/api` on the same domain.
+
+Railway service settings from the repository root:
+
+```text
+Build Command: npm run build
+Start Command: npm start
+```
+
+Environment variables:
+
+```env
+MONGO_DB_STRING=your_mongodb_connection_string
+JWT_SECRET_KEY=your_jwt_secret
+CLIENT_URL=https://taskmanager-production-c5f0.up.railway.app
+NODE_ENV=production
+REDIS_URL=your_redis_url
+```
+
+Do not set `VITE_API_URL` for the single URL deployment unless you want to override the default. The default client API base is `/api`.
+
 ## Notes
 
 - JWT is stored in an httpOnly cookie named `token`.
